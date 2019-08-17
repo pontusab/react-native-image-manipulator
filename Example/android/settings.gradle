@@ -1,0 +1,6 @@
+rootProject.name = 'Example'
+
+include ':react-native-image-manipulator'
+project(':react-native-image-manipulator').projectDir = new File(rootProject.projectDir, '../../../react-native-image-manipulator/android')
+
+include ':app'

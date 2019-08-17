@@ -1,0 +1,45 @@
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+platform :ios, '10.0'
+
+install! 'cocoapods', :deterministic_uuids => false
+
+target 'Example' do
+  platform :ios, '10.0'
+
+  react_path = '../node_modules/react-native'
+  yoga_path = File.join(react_path, 'ReactCommon/yoga')
+
+  pod 'React', :path => react_path, :subspecs => [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTCameraRoll',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTPushNotification',
+    'RCTText',
+    'RCTWebSocket',
+  ]
+
+  # the following dependencies are dependencies of React native itself.
+  pod 'DoubleConversion', :podspec => File.join(react_path,'third-party-podspecs/DoubleConversion.podspec')
+  pod 'Folly', :podspec => File.join(react_path,'third-party-podspecs/Folly.podspec')
+  pod 'glog', :podspec => File.join(react_path,'third-party-podspecs/glog.podspec')
+  pod 'yoga', :path => File.join(react_path, 'ReactCommon/yoga')
+
+  pod 'react-native-image-manipulator', :path => '../../ios'
+end
+
+# The following is needed to ensure the "archive" step works in XCode.
+# It removes React from the Pods project, as it is already included in the main project.
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end

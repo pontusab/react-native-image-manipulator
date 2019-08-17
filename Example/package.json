@@ -1,0 +1,19 @@
+{
+  "name": "Example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start:ios": "react-native run-ios",
+    "start:android": "react-native run-android"
+  },
+  "dependencies": {
+    "react": "16.8.6",
+    "react-native": "0.59.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/runtime": "^7.5.4",
+    "metro-react-native-babel-preset": "^0.55.0"
+  }
+}
