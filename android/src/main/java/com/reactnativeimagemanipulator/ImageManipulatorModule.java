@@ -124,19 +124,19 @@ public class ImageManipulatorModule extends ReactContextBaseJavaModule {
         bmp = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), rotationMatrix, true);
       } else if (options.hasKey("crop")) {
         ReadableMap crop = options.getMap("crop");
-        if (!crop.hasKey("originX") || !crop.hasKey("originY") || !crop.hasKey("width") || !crop.hasKey("height")) {
-          promise.reject("E_INVALID_CROP_DATA", "Invalid crop options has been passed. Please make sure the object contains originX, originY, width and height.");
-          return;
-        }
+        // if (!crop.hasKey("originX") || !crop.hasKey("originY") || !crop.hasKey("width") || !crop.hasKey("height")) {
+        //   promise.reject("E_INVALID_CROP_DATA", "Invalid crop options has been passed. Please make sure the object contains originX, originY, width and height.");
+        //   return;
+        // }
         int originX, originY, requestedWidth, requestedHeight;
         originX = (int) crop.getDouble("originX");
         originY = (int) crop.getDouble("originY");
         requestedWidth = (int) crop.getDouble("width");
         requestedHeight = (int) crop.getDouble("height");
-        if (originX > imageWidth || originY > imageHeight || requestedWidth > bmp.getWidth() || requestedHeight > bmp.getHeight()) {
-          promise.reject("E_INVALID_CROP_DATA", "Invalid crop options has been passed. Please make sure the requested crop rectangle is inside source image.");
-          return;
-        }
+        // if (originX > imageWidth || originY > imageHeight || requestedWidth > bmp.getWidth() || requestedHeight > bmp.getHeight()) {
+        //   promise.reject("E_INVALID_CROP_DATA", "Invalid crop options has been passed. Please make sure the requested crop rectangle is inside source image.");
+        //   return;
+        // }
         bmp = Bitmap.createBitmap(bmp, originX, originY, requestedWidth, requestedHeight);
       }
     }
