@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "react": "16.8.6",
-    "react-native": "0.59.10"
+    "react-native": "0.59.10",
+    "react-native-camera": "2.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

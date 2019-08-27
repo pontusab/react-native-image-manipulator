@@ -32,6 +32,8 @@ target 'Example' do
   pod 'yoga', :path => File.join(react_path, 'ReactCommon/yoga')
 
   pod 'react-native-image-manipulator', :path => '../../ios'
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
 end
 
 # The following is needed to ensure the "archive" step works in XCode.
