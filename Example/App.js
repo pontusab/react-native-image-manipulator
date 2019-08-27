@@ -57,6 +57,8 @@ export default class ImageManipulatorSample extends React.Component {
       }
     );
 
+    console.log(image);
+
     this.setState({ image });
   };
 

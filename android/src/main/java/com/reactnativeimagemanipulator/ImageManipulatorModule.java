@@ -172,7 +172,7 @@ public class ImageManipulatorModule extends ReactContextBaseJavaModule {
     String path = null;
     String base64String = null;
     try {
-      path = this.getReactApplicationContext().getFilesDir() + "/" + UUID.randomUUID() + extension;
+      path = this.getReactApplicationContext().getCacheDir() + "/" + UUID.randomUUID() + extension;
       out = new FileOutputStream(path);
       bmp.compress(compressFormat, compressionQuality, out);
 
