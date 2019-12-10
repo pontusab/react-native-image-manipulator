@@ -26,6 +26,10 @@ RCT_EXPORT_METHOD(manipulateAsync:(NSString *)uri
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSURL *url = [NSURL URLWithString:uri];
+  // no scheme provided in uri, handle as a local path and add 'file://' scheme
+  if (!url.scheme) {
+    url = [NSURL fileURLWithPath:uri isDirectory:false];
+  }
   NSString *path = [url.path stringByStandardizingPath];
 
   if ([[url scheme] isEqualToString:@"assets-library"]) {

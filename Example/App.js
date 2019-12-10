@@ -1,7 +1,23 @@
 import React from 'react';
-import { Button, View, Image, TouchableOpacity, Text } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  Platform,
+  Dimensions
+} from 'react-native';
 import * as ImageManipulator from 'react-native-image-manipulator';
-import { RNCamera } from 'react-native-camera';
+import { request, PERMISSIONS } from 'react-native-permissions';
+import ImageEditor from './ImageEditor';
+import * as MediaLibrary from 'react-native-media-library';
+
+const { width } = Dimensions.get('window');
+
+const PERMISSION =
+  Platform.OS === 'ios'
+    ? PERMISSIONS.IOS.PHOTO_LIBRARY
+    : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
 
 const styles = {
   container: {
@@ -16,7 +32,7 @@ const styles = {
   },
   capture: {
     flex: 0,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
     borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,
@@ -25,98 +41,103 @@ const styles = {
   }
 };
 
+const IMAGE_EDITOR_SIZE = width;
+
 export default class ImageManipulatorSample extends React.Component {
   state = {
-    ready: false,
+    crop: {},
+    croppedImage: null,
     image: null
   };
 
   componentDidMount() {
-    this.setState({
-      ready: true
-    });
+    request(PERMISSION);
+
+    this.getPhoto();
   }
 
-  takePicture = async () => {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options);
-      this.setState({
-        image: data
-      });
-    }
+  getPhoto = async () => {
+    const { assets } = await MediaLibrary.getAssetsAsync({
+      first: 1000
+    });
+
+    this.setState({
+      image: assets[assets.length - 1],
+      ratio: assets[0].width / assets[0].height
+    });
   };
 
-  _rotate90andFlip = async () => {
-    const image = await ImageManipulator.manipulateAsync(
-      this.state.image.uri,
-      [{ rotate: 90 }],
-      {
-        compress: 1,
-        format: ImageManipulator.SaveFormat.PNG
-      }
-    );
-
-    console.log(image);
-
-    this.setState({ image });
+  onChange = crop => {
+    const [scale, originX, originY] = crop;
+    this.crop = { scale, originX, originY };
+    console.log('crop', this.crop);
   };
 
-  _renderImage = () => {
-    return (
-      <View
+  handleCrop = async () => {
+    const { image } = this.state;
+    //(960 / 1.33 - 350 * 1.33) / 2,
+    // const originX =
+    // (image.width / this.state.ratio - IMAGE_EDITOR_SIZE * this.state.ratio) /
+    // 2;
+
+    const crop = {
+      originY: 0,
+      originX: 0,
+      // originX: (-(this.crop.originX - 46.875) * 3) / this.crop.scale,
+      width: (image.height * this.state.ratio) / this.crop.scale,
+      height: (image.height * this.state.ratio) / this.crop.scale
+    };
+
+    const data = await ImageManipulator.manipulateAsync(image.uri, [{ crop }]);
+
+    this.setState({ croppedImage: data });
+  };
+
+  renderImage = () => {
+    return this.state.croppedImage ? (
+      <Image
+        source={this.state.croppedImage}
         style={{
-          marginVertical: 20,
-          alignItems: 'center',
-          justifyContent: 'center'
+          width: IMAGE_EDITOR_SIZE,
+          height: IMAGE_EDITOR_SIZE
         }}
-      >
-        <Image
-          source={this.state.image}
-          style={{ width: 300, height: 300, resizeMode: 'contain' }}
-        />
-      </View>
+        resizeMode="contain"
+      />
+    ) : (
+      <ImageEditor
+        onChange={this.onChange}
+        source={this.state.image}
+        ratio={this.state.ratio}
+        minZoom={this.state.ratio}
+      />
     );
   };
 
   render() {
+    if (!this.state.image) {
+      return null;
+    }
+
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <RNCamera
-          ref={ref => {
-            this.camera = ref;
+      <View style={{ flex: 1, marginTop: 200 }}>
+        <View
+          style={{
+            width: IMAGE_EDITOR_SIZE,
+            height: IMAGE_EDITOR_SIZE
           }}
-          style={styles.preview}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          androidCameraPermissionOptions={{
-            title: 'Permission to use camera',
-            message: 'We need your permission to use your camera',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel'
-          }}
-          androidRecordAudioPermissionOptions={{
-            title: 'Permission to use audio recording',
-            message: 'We need your permission to use your audio',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel'
-          }}
-          onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            console.log(barcodes);
-          }}
-        />
+        >
+          {this.renderImage()}
+        </View>
+
         <View
           style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}
         >
-          <TouchableOpacity
-            onPress={this.takePicture.bind(this)}
-            style={styles.capture}
-          >
-            <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>
+          {this.state.image && (
+            <TouchableOpacity onPress={this.handleCrop} style={styles.capture}>
+              <Text style={{ fontSize: 16, color: 'white' }}>Crop image</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        {this.state.ready && this._renderImage()}
-        <Button title="Rotate and Flip" onPress={this._rotate90andFlip} />
       </View>
     );
   }

@@ -31,8 +31,12 @@ target 'Example' do
   pod 'glog', :podspec => File.join(react_path,'third-party-podspecs/glog.podspec')
   pod 'yoga', :path => File.join(react_path, 'ReactCommon/yoga')
 
-  pod 'react-native-image-manipulator', :path => '../../ios'
-  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+  pod 'react-native-image-manipulator', :path => '../../'
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+  pod 'RNPermissions', :path => "../node_modules/react-native-permissions"
+  pod 'Permission-PhotoLibrary', :path => "../node_modules/react-native-permissions/ios/PhotoLibrary.podspec"
+  pod 'react-native-media-library', :path => '../node_modules/react-native-media-library'
 
 end
 

@@ -6,10 +6,15 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - Permission-PhotoLibrary (2.0.0-rc.0):
+    - RNPermissions
   - React (0.59.10):
     - React/Core (= 0.59.10)
-  - react-native-image-manipulator (1.0.1):
+  - react-native-media-library (1.0.0):
     - React
+  - react-native-photo-manipulator (1.1.0):
+    - React
+    - WCPhotoManipulator
   - React/Core (0.59.10):
     - yoga (= 0.59.10.React)
   - React/CxxBridge (0.59.10):
@@ -62,13 +67,22 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNGestureHandler (1.4.1):
+    - React
+  - RNPermissions (2.0.0-rc.0):
+    - React
+  - RNReanimated (1.2.0):
+    - React
+  - WCPhotoManipulator (1.0.0)
   - yoga (0.59.10.React)
 
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - react-native-image-manipulator (from `../../ios`)
+  - Permission-PhotoLibrary (from `../node_modules/react-native-permissions/ios/PhotoLibrary.podspec`)
+  - react-native-media-library (from `../node_modules/react-native-media-library`)
+  - react-native-photo-manipulator (from `../node_modules/react-native-photo-manipulator`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -81,11 +95,15 @@ DEPENDENCIES:
   - React/RCTPushNotification (from `../node_modules/react-native`)
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
+    - WCPhotoManipulator
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -94,10 +112,20 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-PhotoLibrary:
+    :path: "../node_modules/react-native-permissions/ios/PhotoLibrary.podspec"
   React:
     :path: "../node_modules/react-native"
-  react-native-image-manipulator:
-    :path: "../../ios"
+  react-native-media-library:
+    :path: "../node_modules/react-native-media-library"
+  react-native-photo-manipulator:
+    :path: "../node_modules/react-native-photo-manipulator"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -106,10 +134,16 @@ SPEC CHECKSUMS:
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
+  Permission-PhotoLibrary: 0d5f7f07184935d8e899e0e63e55f0702084960d
   React: 36d0768f9e93be2473b37e7fa64f92c1d5341eef
-  react-native-image-manipulator: 35c03d3c5cf8cc77ea26ff84c6f3b7e778a640e1
+  react-native-media-library: ec7242c9dfea9cffe53c814ba85170d3e1f8892a
+  react-native-photo-manipulator: 9a02f337daec55c2c7ae344ccae429c76ce9270b
+  RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
+  RNPermissions: 86932e45b170515f71f76751bc9fa055910b049f
+  RNReanimated: 1b52415c4302f198cb581282a0166690bad62c43
+  WCPhotoManipulator: 2a49edd1ecdf0aec9207b86257cee0cc7f46ea79
   yoga: 684513b14b03201579ba3cee20218c9d1298b0cc
 
-PODFILE CHECKSUM: 9b1f0a48a7cec2e42380936110d5ffebaf0e23db
+PODFILE CHECKSUM: 6bb880790440e9f427987c441e0b328599820bfa
 
 COCOAPODS: 1.6.1
