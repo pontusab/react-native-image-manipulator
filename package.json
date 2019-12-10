@@ -1,7 +1,7 @@
 {
   "name": "@pontusab/react-native-image-manipulator",
   "author": "Pontus Abrahamsson",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "An API to modify images stored in app scope.",
   "homepage": "https://github.com/pontusab/react-native-image-manipulator",
   "main": "build/ImageManipulator.js",
