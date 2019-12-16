@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/pontusab/react-native-image-manipulator.git", :tag => "v#{s.version}" }
   s.source_files   = 'ImageManipulator/**/*.{h,m}'
-  s.preserve_paths = 'ImageManipulator/**/*.{h,m}'
 
   s.dependency 'React'
 end
