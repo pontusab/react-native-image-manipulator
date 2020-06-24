@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
 
   s.source       = { :git => "https://github.com/pontusab/react-native-image-manipulator.git", :tag => "v#{s.version}" }
-  s.source_files   = 'ImageManipulator/**/*.{h,m}'
+  s.source_files   = 'ios/**/*.{h,m}'
 
   s.dependency 'React'
 end
