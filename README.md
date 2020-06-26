@@ -2,19 +2,33 @@ An API to modify images stored on the local file system.
 
 ## Installation
 
-1. `yarn add https://github.com/pontusab/react-native-image-manipulator`
-2. `pod 'react-native-image-manipulator', :path => './node_modules/react-native-image-manipulator/ios'`
-3. `pod install`
+Uses react-native autolinking, so no special steps.
+
+```bash
+# First add the package to your project
+yarn add pontusab@react-native-image-manipulator
+# If deploying to IOS, make sure all your pod dependencies are up to date
+(cd ios && pod install)
+```
 
 ## API
 
 ```js
-import * as ImageManipulator from 'react-native-image-manipulator';
+import * as ImageManipulator from "@pontusab/react-native-image-manipulator";
 ```
 
 ### `ImageManipulator.manipulateAsync(uri, actions, saveOptions)`
 
 Manipulate the image provided via `uri`. Available modifications are rotating, flipping (mirroring), resizing and cropping. Each invocation results in a new file. With one invocation you can provide a set of actions to perform over the image. Overwriting the source file would not have an effect in displaying the result as images are cached.
+
+For easy access, you can use the default export too:
+
+```js
+import manipulateAsync from '@pontusab/react-native-image-manipulator'
+//...
+
+await manipulateAsync(uri, ...)
+```
 
 #### Arguments
 
@@ -42,10 +56,10 @@ Returns `{ uri, width, height }` where `uri` is a URI to the modified image (use
 This will first rotate the image 90 degrees clockwise, then flip the rotated image vertically and save it as a PNG.
 
 ```javascript
-import React from 'react';
-import { Button, View, Image } from 'react-native';
-import { Asset } from 'expo-asset';
-import * as ImageManipulator from 'react-native-image-manipulator';
+import React from "react";
+import { Button, View, Image } from "react-native";
+import { Asset } from "expo-asset";
+import * as ImageManipulator from "react-native-image-manipulator";
 
 export default class ImageManipulatorSample extends React.Component {
   state = {
@@ -55,7 +69,7 @@ export default class ImageManipulatorSample extends React.Component {
 
   componentDidMount() {
     (async () => {
-      const image = Asset.fromModule(require('./assets/snack-icon.png'));
+      const image = Asset.fromModule(require("./assets/snack-icon.png"));
       await image.downloadAsync();
       this.setState({
         ready: true,
@@ -66,7 +80,7 @@ export default class ImageManipulatorSample extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
+      <View style={{ flex: 1, justifyContent: "center" }}>
         {this.state.ready && this._renderImage()}
         <Button title="Rotate and Flip" onPress={this._rotate90andFlip} />
       </View>
@@ -84,10 +98,16 @@ export default class ImageManipulatorSample extends React.Component {
 
   _renderImage = () => {
     return (
-      <View style={{ marginVertical: 20, alignItems: 'center', justifyContent: 'center' }}>
+      <View
+        style={{
+          marginVertical: 20,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Image
           source={{ uri: this.state.image.localUri || this.state.image.uri }}
-          style={{ width: 300, height: 300, resizeMode: 'contain' }}
+          style={{ width: 300, height: 300, resizeMode: "contain" }}
         />
       </View>
     );
