@@ -14,4 +14,5 @@ export async function manipulateAsync(uri, actions = [], { format = SaveFormat.J
     });
 }
 export * from './ImageManipulator.types';
+export default manipulateAsync;
 //# sourceMappingURL=ImageManipulator.js.map
