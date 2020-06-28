@@ -14,7 +14,7 @@ yarn add pontusab@react-native-image-manipulator
 ## API
 
 ```js
-import * as ImageManipulator from "@pontusab/react-native-image-manipulator";
+import * as ImageManipulator from '@pontusab/react-native-image-manipulator';
 ```
 
 ### `ImageManipulator.manipulateAsync(uri, actions, saveOptions)`
@@ -56,10 +56,10 @@ Returns `{ uri, width, height }` where `uri` is a URI to the modified image (use
 This will first rotate the image 90 degrees clockwise, then flip the rotated image vertically and save it as a PNG.
 
 ```javascript
-import React from "react";
-import { Button, View, Image } from "react-native";
-import { Asset } from "expo-asset";
-import * as ImageManipulator from "react-native-image-manipulator";
+import React from 'react';
+import { Button, View, Image } from 'react-native';
+import { Asset } from 'expo-asset';
+import * as ImageManipulator from 'react-native-image-manipulator';
 
 export default class ImageManipulatorSample extends React.Component {
   state = {
@@ -69,7 +69,7 @@ export default class ImageManipulatorSample extends React.Component {
 
   componentDidMount() {
     (async () => {
-      const image = Asset.fromModule(require("./assets/snack-icon.png"));
+      const image = Asset.fromModule(require('./assets/snack-icon.png'));
       await image.downloadAsync();
       this.setState({
         ready: true,
@@ -80,7 +80,7 @@ export default class ImageManipulatorSample extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         {this.state.ready && this._renderImage()}
         <Button title="Rotate and Flip" onPress={this._rotate90andFlip} />
       </View>
@@ -101,13 +101,13 @@ export default class ImageManipulatorSample extends React.Component {
       <View
         style={{
           marginVertical: 20,
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Image
           source={{ uri: this.state.image.localUri || this.state.image.uri }}
-          style={{ width: 300, height: 300, resizeMode: "contain" }}
+          style={{ width: 300, height: 300, resizeMode: 'contain' }}
         />
       </View>
     );
