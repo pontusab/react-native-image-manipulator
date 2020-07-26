@@ -26,3 +26,4 @@ export async function manipulateAsync(
 }
 
 export * from './ImageManipulator.types';
+export default manipulateAsync;

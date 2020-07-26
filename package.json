@@ -8,10 +8,15 @@
   "types": "build/ImageManipulator.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "install-peers": "install-peers"
   },
   "devDependencies": {
-    "react-native": "^0.60.5",
+    "install-peers-cli": "^2.2.0",
     "typescript": "^3.5.3"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-native": "^0.62.2"
   }
 }
