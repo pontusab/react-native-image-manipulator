@@ -14,7 +14,7 @@
     "react-native-media-library": "https://github.com/pontusab/react-native-media-library",
     "react-native-permissions": "^2.0.0-rc.0",
     "react-native-photo-manipulator": "^1.1.0",
-    "react-native-reanimated": "^1.2.0"
+    "react-native-reanimated": "^2.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
